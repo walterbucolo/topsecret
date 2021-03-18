@@ -1,3 +1,4 @@
+-f https://jenkins.evbhome.com/view/wheelhouses/job/wheelhouse-index/lastSuccessfulBuild/artifact/16.04/index.html
 aniso8601==9.0.1
 appnope==0.1.2
 attrs==20.3.0
@@ -8,6 +9,7 @@ decorator==4.4.2
 Flask==1.1.2
 Flask-RESTful==0.3.8
 Flask-Testing==0.8.1
+gunicorn==20.0.4
 iniconfig==1.1.1
 ipdb==0.13.6
 ipython==7.21.0
