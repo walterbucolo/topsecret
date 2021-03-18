@@ -1,4 +1,3 @@
--f https://jenkins.evbhome.com/view/wheelhouses/job/wheelhouse-index/lastSuccessfulBuild/artifact/16.04/index.html
 aniso8601==9.0.1
 appnope==0.1.2
 attrs==20.3.0
