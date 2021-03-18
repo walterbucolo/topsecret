@@ -1,31 +1,18 @@
-from flask_restful import Resource
+
+from flask_restful import (
+    Resource,
+    request,
+)
 
 from topsecret.services.location_service import GetLocation
 from topsecret.services.message_service import GetMessage
 
 
 class TopSecret(Resource):
-    def post(self):
-        data = {
-            "satellites": [
-                {
-                    "name": "kenobi",
-                    "distance": 4,
-                    "message": ["este", " ", " ", "mensaje", " "],
-                },
-                {
-                    "name": "skywalker",
-                    "distance": 5.657,
-                    "message": [" ", "es", " ", " ", "secreto"],
-                },
-                {
-                    "name": "sato",
-                    "distance": 4,
-                    "message": ["este", " ", "un", " ", " "],
-                },
-            ]
-        }
 
+    def post(self):
+
+        data = request.json
         distances = {}
         messages = {}
         for satellite in data['satellites']:
