@@ -1,6 +1,6 @@
 from flask_restful import Resource
 
-from topsecret.services.location_service import get_location
+from topsecret.services.location_service import GetLocation
 from topsecret.services.message_service import get_message
 
 
@@ -32,7 +32,8 @@ class TopSecret(Resource):
             distances[satellite['name']] = satellite['distance'] 
             messages[satellite['name']] = satellite['message']
 
-        x, y = get_location(distances["kenobi"], distances["skywalker"], distances["sato"])
+        location = GetLocation()
+        x, y = location.get_location(distances["kenobi"], distances["skywalker"], distances["sato"])
         message = get_message(messages["kenobi"], messages["skywalker"], messages["sato"])
 
         return {
