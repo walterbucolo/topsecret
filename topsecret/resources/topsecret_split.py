@@ -1,26 +1,26 @@
 from flask import Response
 from flask_restful import (
     Resource,
-    request,
+    request, abort,
 )
 from flask_accepts import (
     accepts,
-    responds,
 )
 
-from topsecret.controllers.topsecret_controller import TopSecretController
+from topsecret.views.topsecret_view import TopSecretView
 from topsecret.models.satellite import Satellite
 from topsecret.schemas.satellite_schema import SatelliteSchema
 
 
 class TopSecretSplit(Resource):
     satellites = []
+    allowed_satellites = ["kenobi", "skywalker", "sato"]
 
     def get(self):
         if len(self.satellites) < 3:
-            Response(status=404)
+            abort(404, error_message='Missing information')
 
-        topsecret_response = TopSecretController().topsecret_controller(self.satellites)
+        topsecret_response = TopSecretView().topsecret_view(self.satellites)
 
         return topsecret_response
 
@@ -30,6 +30,8 @@ class TopSecretSplit(Resource):
         for saved_satellite in self.satellites:
             if satellite_name == saved_satellite.name:
                 self.satellites.remove(saved_satellite)
+        if satellite_name not in self.allowed_satellites:
+            return abort(404, error_message='Unknown satellite name: {}'.format(satellite_name))
 
         data = request.json
 
@@ -40,4 +42,4 @@ class TopSecretSplit(Resource):
                 message=data["message"],
             )
         )
-        return Response(status=200)
+        return Response(status=201)

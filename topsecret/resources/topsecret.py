@@ -4,7 +4,7 @@ from flask_restful import (
     request,
 )
 
-from topsecret.controllers.topsecret_controller import TopSecretController
+from topsecret.views.topsecret_view import TopSecretView
 from topsecret.models.satellite import Satellite
 from topsecret.schemas.satellite_schema import SatellitesSchema
 from topsecret.schemas.ship_schema import ShipSchema
@@ -26,5 +26,6 @@ class TopSecret(Resource):
                 )
             )
 
-        top_secret_response = TopSecretController().topsecret_controller(satellites)
+        top_secret_response = TopSecretView().topsecret_view(satellites)
+
         return top_secret_response
