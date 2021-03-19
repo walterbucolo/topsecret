@@ -6,7 +6,7 @@ This project is hosted in heroku:
 **https://secret-quasar-fire-operation.herokuapp.com/**
 
 ## Endpoints
-### /POST topsecret with the following payload data structure and response:
+### POST /topsecret 
 **Payload**
 ```
 {
@@ -32,7 +32,7 @@ This project is hosted in heroku:
 **Response**
 ```
 {
-    "message": "pepe dale vos podes si",
+    "message": "This is a secret message",
     "position": {
         "x": -487.5,
         "y": 1575.1
@@ -40,11 +40,36 @@ This project is hosted in heroku:
 }
 ```
 
-    /POST topsecret/<satellite_name>
-**Payload  example:**
-    
-    /GET topsecret
-  
+### POST /topsecret_split/<satellite_name> 
+**Payload**
+```
+{
+    "distance": 100.0,
+    "message":["This", " ", " ", "secret", " "]
+}
+```    
+**Response**
+```
+201 created
+```
+### GET /topsecret_split
+**Response**
+If there is enough information to get the message and the position:
+```
+{
+    "message": "This is a secret message",
+    "position": {
+        "x": -487.5,
+        "y": 1575.1
+    }
+}
+```
+If the amount of _satellite_ objects created with the endpoint POST /topsecret_split_<satellite_name> is less than 3:
+```
+{
+    "error_message": "Missing information"
+}
+```
 
 ## Install and run locally
 
