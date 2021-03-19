@@ -6,8 +6,8 @@ This project is hosted in heroku:
 **https://secret-quasar-fire-operation.herokuapp.com/**
 
 ## Endpoints
-    /POST topsecret
-payload  example:
+### /POST topsecret with the following payload data structure and response:
+**Payload**
 ```
 {
    "satellites":[
@@ -29,9 +29,20 @@ payload  example:
    ]
 }
 ```
-
+**Response**
+```
+{
+    "message": "pepe dale vos podes si",
+    "position": {
+        "x": -487.5,
+        "y": 1575.1
+    }
+}
+```
 
     /POST topsecret/<satellite_name>
+**Payload  example:**
+    
     /GET topsecret
   
 
