@@ -4,29 +4,24 @@ from flask_restful import (
     request,
 )
 
-from topsecret.services.location_service import GetLocation
-from topsecret.services.message_service import GetMessage
+from topsecret.controllers.topsecret_controller import TopSecretController
+from topsecret.models.satellite import Satellite
 
 
 class TopSecret(Resource):
 
     def post(self):
-
+        satellites = []
         data = request.json
-        distances = {}
-        messages = {}
-        for satellite in data['satellites']:
-            distances[satellite['name']] = satellite['distance'] 
-            messages[satellite['name']] = satellite['message']
+        for satellite in data["satellites"]:
+            satellites.append(
+                Satellite(
+                    name=satellite["name"],
+                    distance=satellite["distance"],
+                    message=satellite["message"],
+                )
+            )
 
-        location = GetLocation()
-        x, y = location.get_location(distances["kenobi"], distances["skywalker"], distances["sato"])
-        message = GetMessage().get_message(messages["kenobi"], messages["skywalker"], messages["sato"])
+        top_secret_response = TopSecretController().topsecret_controller(satellites)
 
-        return {
-            "position": {
-                "x": x,
-                "y": y,
-            },
-            "message": message
-        }
+        return top_secret_response
