@@ -1,9 +1,11 @@
+from flask_restful import abort
 
 
 class GetMessage:
     """
     This class returns the completed message the ship sent.
     """
+
     def get_message(self, kenobi_message, skywalker_message, sato_message):
         # check the lag
         kenobi_message_size = len(kenobi_message)
@@ -27,9 +29,11 @@ class GetMessage:
         # check missing words
         scape_value = " "
         message_list = []
-        for split_words in zip(kenobi_message, skywalker_message, sato_message):
-            for word in split_words:
-                if not word == scape_value:
-                    message_list.append(word)
-                    break
-        return " ".join(message_list)
+        message = " "
+        for words_split in zip(kenobi_message, skywalker_message, sato_message):
+            words_split = {x for x in words_split if x != scape_value}
+            if not len(words_split) == 1:
+                abort(404, error_message='Unable to get the secret message')
+            else:
+                message_list += words_split
+        return message.join(message_list)

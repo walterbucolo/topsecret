@@ -1,19 +1,16 @@
 from flask import Response
+from flask_restful import abort
 
 from topsecret.services.location_service import GetLocation
 from topsecret.services.message_service import GetMessage
 
 
-class TopSecretController:
+class TopSecretView:
 
-    allowed_satellites = ["kenobi", "skywalker", "sato"]
-
-    def topsecret_controller(self, satellites):
+    def topsecret_view(self, satellites):
         distances = {}
         messages = {}
         for satellite in satellites:
-            if satellite.name not in self.allowed_satellites:
-                return Response(status=404)
             distances[satellite.name] = satellite.distance
             messages[satellite.name] = satellite.message
 
