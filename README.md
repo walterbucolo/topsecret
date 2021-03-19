@@ -1,6 +1,6 @@
 # Quasar fire operation
 
-## About
+## Deploy
 This project is hosted in heroku:
 
 **https://secret-quasar-fire-operation.herokuapp.com/**
