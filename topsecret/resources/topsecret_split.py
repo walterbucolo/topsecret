@@ -3,9 +3,14 @@ from flask_restful import (
     Resource,
     request,
 )
+from flask_accepts import (
+    accepts,
+    responds,
+)
 
 from topsecret.controllers.topsecret_controller import TopSecretController
 from topsecret.models.satellite import Satellite
+from topsecret.schemas.satellite_schema import SatelliteSchema
 
 
 class TopSecretSplit(Resource):
@@ -13,12 +18,13 @@ class TopSecretSplit(Resource):
 
     def get(self):
         if len(self.satellites) < 3:
-            Response(404)
+            Response(status=404)
 
         topsecret_response = TopSecretController().topsecret_controller(self.satellites)
 
         return topsecret_response
 
+    @accepts(schema=SatelliteSchema)
     def post(self, satellite_name):
 
         for saved_satellite in self.satellites:
