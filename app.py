@@ -6,7 +6,7 @@ from topsecret.resources.topsecret_split import TopSecretSplit
 api = Api(app)
 
 api.add_resource(TopSecret, '/topsecret')
-api.add_resource(TopSecretSplit, '/topsecret_split', '/topsecret_split/<satellite>')
+api.add_resource(TopSecretSplit, '/topsecret_split', '/topsecret_split/<satellite_name>')
 
 if __name__ == '__main__':
     app.run(debug=True)

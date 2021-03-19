@@ -14,21 +14,22 @@ class TopSecretSplit(Resource):
     def get(self):
         if len(self.satellites) < 3:
             Response(404)
-        topsecret_response = TopSecretController.topsecret_controller(self.satellites)
+
+        topsecret_response = TopSecretController().topsecret_controller(self.satellites)
 
         return topsecret_response
 
-    def post(self, satellite):
-        import ipdb; ipdb.set_trace()
+    def post(self, satellite_name):
+
         for saved_satellite in self.satellites:
-            if satellite.name == saved_satellite.name:
+            if satellite_name == saved_satellite.name:
                 self.satellites.remove(saved_satellite)
 
         data = request.json
 
         self.satellites.append(
             Satellite(
-                name=satellite,
+                name=satellite_name,
                 distance=data["distance"],
                 message=data["message"],
             )
